@@ -1,0 +1,44 @@
+# Dependencies
+/node_modules
+/.pnpm-store
+
+# Next.js build output
+/.next/
+/out/
+
+# Production & Electron build outputs
+/dist-win/
+/build/
+*.exe
+*.apk
+
+# Logs and temporary files
+*.log
+tunnel.log
+tunnel2.log
+tsconfig.tsbuildinfo
+scratch/
+scratch_history
+
+# Local environment files (sensitive)
+.env
+.env*.local
+.env.production
+.env.development
+
+# Android local build & SDK paths
+/android/.gradle/
+/android/build/
+/android/app/build/
+/android/local.properties
+/android/capacitor-cordova-android-plugins/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Documents / Raw Client Uploads
+*.docx
+
