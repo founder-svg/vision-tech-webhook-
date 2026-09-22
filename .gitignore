@@ -11,6 +11,8 @@
 /build/
 *.exe
 *.apk
+!VisionTech-WhatsApp-Simulator.apk
+
 
 # Logs and temporary files
 *.log
