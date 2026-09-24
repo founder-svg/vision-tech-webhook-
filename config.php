@@ -4,26 +4,38 @@
  * 
  * Target Domain: crm.visiontechautomation.in
  * Engine: Meta WhatsApp Cloud API v20.0 Direct
+ * 
+ * NOTE: Set environment variables or update the values below before production deployment.
  */
 
+// Load environment variables if .env exists
+if (file_exists(__DIR__ . '/.env')) {
+    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue;
+        list($key, $value) = explode('=', $line, 2);
+        putenv(trim($key) . '=' . trim($value));
+    }
+}
+
 // Meta WhatsApp Cloud API Direct Credentials
-define('META_ACCESS_TOKEN', 'EAAjsTrAR0ZBABSXd3sKxQFwN1ueZBgYnCoj46HNCe4IZCkMDtlvG0MMVZC2uzAAJZA4yB1rp8idrs9vY');
-define('META_PHONE_NUMBER_ID', '1348331951688529');
-define('META_WABA_ID', '26119545054390590');
-define('META_VERIFY_TOKEN', 'vision_tech_secret_2026'); // Handshake verify token for hub.verify_token
+define('META_ACCESS_TOKEN', getenv('META_ACCESS_TOKEN') ?: 'YOUR_META_ACCESS_TOKEN');
+define('META_PHONE_NUMBER_ID', getenv('META_PHONE_NUMBER_ID') ?: 'YOUR_PHONE_NUMBER_ID');
+define('META_WABA_ID', getenv('META_WABA_ID') ?: 'YOUR_WABA_ID');
+define('META_VERIFY_TOKEN', getenv('META_VERIFY_TOKEN') ?: 'vision_tech_secret_2026');
 
 // Webhook Security & CRM Forwarding Settings
-define('VISIONTECH_HMAC_SECRET', 'vt_whsec_prod_c984f1a27e053b6d91480f2a74c83e16'); // X-VisionTech-Signature HMAC SHA256 key
-define('VISIONTECH_WEBHOOK_TOKEN', 'vt_wh_tok_prod_89e472a10b5c3d1f'); // X-CRM-Webhook-Token static header token
-define('CRM_WEBHOOK_RECEIVER_URL', 'https://crm.visiontechautomation.in/api/v1/whatsapp-receiver');
-define('AUTO_FORWARD_TO_CRM', true);
+define('VISIONTECH_HMAC_SECRET', getenv('VISIONTECH_HMAC_SECRET') ?: 'YOUR_WEBHOOK_HMAC_SECRET');
+define('VISIONTECH_WEBHOOK_TOKEN', getenv('VISIONTECH_WEBHOOK_TOKEN') ?: 'YOUR_WEBHOOK_TOKEN');
+define('CRM_WEBHOOK_RECEIVER_URL', getenv('CRM_WEBHOOK_RECEIVER_URL') ?: 'https://crm.visiontechautomation.in/api/v1/whatsapp-receiver');
+define('AUTO_FORWARD_TO_CRM', getenv('AUTO_FORWARD_TO_CRM') !== 'false');
 
 // Optional Database Logging Credentials (MySQL / MariaDB for Worksuite CRM)
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'worksuite_crm');
-define('DB_USER', 'crm_user');
-define('DB_PASS', 'crm_password');
-define('ENABLE_DB_LOGGING', false); // Set to true if connecting directly to MySQL
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_NAME', getenv('DB_NAME') ?: 'worksuite_crm');
+define('DB_USER', getenv('DB_USER') ?: 'crm_user');
+define('DB_PASS', getenv('DB_PASS') ?: 'crm_password');
+define('ENABLE_DB_LOGGING', getenv('ENABLE_DB_LOGGING') === 'true');
 
 // File Logging
 define('LOG_FILE', __DIR__ . '/webhook.log');

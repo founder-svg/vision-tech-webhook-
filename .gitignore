@@ -1,0 +1,27 @@
+# Environment & Secrets
+.env
+.env.local
+*.log
+webhook.log
+
+# Temporary and Build Files
+node_modules/
+.next/
+dist/
+dist-win/
+out/
+scratch/
+scratch_history
+*.exe
+*.apk
+*.docx
+*.png
+*.jpeg
+*.jpg
+tsconfig.tsbuildinfo
+tunnel.log
+tunnel2.log
+
+# OS Metadata
+.DS_Store
+Thumbs.db
